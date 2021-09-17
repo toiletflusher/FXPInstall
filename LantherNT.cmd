@@ -4,7 +4,7 @@ cls
 title LantherNT
 echo.
 echo  LantherNT
-echo =================
+echo ===========
 echo.
 echo    Setup is starting Windows
 wpeinit
@@ -15,7 +15,7 @@ goto mainmenu
 cls
 echo.
 echo  LantherNT
-echo =================
+echo ===========
 echo.
 echo    Sorry, this setup answer does not exist.
 echo. 
@@ -26,7 +26,7 @@ goto mainmenu
 cls
 echo.
 echo  LantherNT
-echo =================
+echo ===========
 echo.
 echo    Welcome to Setup.
 echo.
@@ -60,7 +60,7 @@ goto mainmenu
 :continue1w
 echo.
 echo  LantherNT
-echo =================
+echo ===========
 echo.
 echo    Sorry, this setup answer does not exist.
 echo.
@@ -72,7 +72,7 @@ goto continue1
 cls
 echo.
 echo  LantherNT
-echo =================
+echo ===========
 echo.
 echo    Would you like to do automatic or manual partitioning?
 echo.
@@ -92,7 +92,7 @@ goto continue1w
 cls
 echo.
 echo  LantherNT
-echo =================
+echo ===========
 echo.
 echo    Sorry, this setup answer does not exist.
 echo.
@@ -103,7 +103,7 @@ goto continue1
 :manual
 echo.
 echo  LantherNT
-echo =================
+echo ===========
 echo.
 echo    MAKE SURE TO MAKE THE DRIVE G:\
 echo,
@@ -127,7 +127,7 @@ echo lis dis > disktmp.txt
 cls
 echo.
 echo  LantherNT
-echo =================
+echo ===========
 echo.
 echo    The following list shows the existing disks on this
 echo    computer.
@@ -141,7 +141,7 @@ if "%diskn%"=="cancel" GOTO continue1
 cls
 echo.
 echo  LantherNT
-echo =================
+echo ===========
 echo.
 echo    CAUTION: All data on your disk will be lost.
 echo.
@@ -155,7 +155,7 @@ IF "%M%"=="2" GOTO autopart
 cls
 echo.
 echo  LantherNT
-echo =================
+echo ===========
 echo.
 echo    Setup will format your disk.
 echo.
@@ -196,7 +196,7 @@ goto format2
 cls
 echo.
 echo  LantherNT
-echo =================
+echo ===========
 echo.
 echo    The disk has been formatted.
 echo    It is recommended to check the format logs.
@@ -221,7 +221,7 @@ notepad diskpartlog.txt
 cls
 echo,
 echo  LantherNT
-echo =================
+echo ===========
 echo,
 echo    Did the formatting go correctly?
 echo.
@@ -248,7 +248,7 @@ echo  LantherNT
 echo =================
 echo,
 echo                      Please wait while Setup copies files
-echo                      to the FlusherNT installation folders.
+echo                      to the LantherNT installation folders.
 echo                  This might take several minutes to complete.
 echo,
 echo.
@@ -266,7 +266,7 @@ echo,
 bcdboot G:\Windows
 goto setupdone
 :setupdone
-"C:\path_to\nircmd.exe" cdrom open %imagesdrive%
+:: "C:\path_to\nircmd.exe" cdrom open %imagesdrive%
 cls
 echo,
 echo  LantherNT
