@@ -1,9 +1,9 @@
 @echo off
 color 18
 cls
-title FlusherNT Setup
+title LantherNT
 echo.
-echo  FlusherNT Setup
+echo  LantherNT
 echo =================
 echo.
 echo    Setup is starting Windows
@@ -14,7 +14,7 @@ goto mainmenu
 :wrongkey
 cls
 echo.
-echo  FlusherNT Setup
+echo  LantherNT
 echo =================
 echo.
 echo    Sorry, this setup answer does not exist.
@@ -25,16 +25,16 @@ goto mainmenu
 :mainmenu
 cls
 echo.
-echo  FlusherNT Setup
+echo  LantherNT
 echo =================
 echo.
 echo    Welcome to Setup.
 echo.
-echo    This portion of the setup program prepares FlusherNT to
+echo    This portion of the setup program prepares Windows to
 echo    run on your computer.
 echo.
 echo.
-echo       - To set up FlusherNT now, press Y.
+echo       - To set up Windows now, press Y.
 echo.
 echo       - To repair a Windows installation using Recovery
 echo         Console, press R.
@@ -59,7 +59,7 @@ start cmd.exe
 goto mainmenu
 :continue1w
 echo.
-echo  FlusherNT Setup
+echo  LantherNT
 echo =================
 echo.
 echo    Sorry, this setup answer does not exist.
@@ -71,7 +71,7 @@ goto continue1
 :continue1
 cls
 echo.
-echo  FlusherNT Setup
+echo  LantherNT
 echo =================
 echo.
 echo    Would you like to do automatic or manual partitioning?
@@ -91,7 +91,7 @@ goto continue1w
 :manualw
 cls
 echo.
-echo  FlusherNT Setup
+echo  LantherNT
 echo =================
 echo.
 echo    Sorry, this setup answer does not exist.
@@ -102,7 +102,7 @@ pause >nul
 goto continue1
 :manual
 echo.
-echo  FlusherNT Setup
+echo  LantherNT
 echo =================
 echo.
 echo    MAKE SURE TO MAKE THE DRIVE G:\
@@ -126,7 +126,7 @@ goto continue1
 echo lis dis > disktmp.txt
 cls
 echo.
-echo  FlusherNT Setup
+echo  LantherNT
 echo =================
 echo.
 echo    The following list shows the existing disks on this
@@ -140,7 +140,7 @@ set /p diskn=
 if "%diskn%"=="cancel" GOTO continue1
 cls
 echo.
-echo  FlusherNT Setup
+echo  LantherNT
 echo =================
 echo.
 echo    CAUTION: All data on your disk will be lost.
@@ -154,7 +154,7 @@ SET M=%errorlevel%
 IF "%M%"=="2" GOTO autopart
 cls
 echo.
-echo  FlusherNT Setup
+echo  LantherNT
 echo =================
 echo.
 echo    Setup will format your disk.
@@ -195,7 +195,7 @@ goto format2
 :formatdone
 cls
 echo.
-echo  FlusherNT Setup
+echo  LantherNT
 echo =================
 echo.
 echo    The disk has been formatted.
@@ -220,7 +220,7 @@ goto autow
 notepad diskpartlog.txt
 cls
 echo,
-echo  FlusherNT Setup
+echo  LantherNT
 echo =================
 echo,
 echo    Did the formatting go correctly?
@@ -244,7 +244,7 @@ goto install
 cd X:\
 cls
 echo,
-echo  FlusherNT Setup
+echo  LantherNT
 echo =================
 echo,
 echo                      Please wait while Setup copies files
@@ -252,13 +252,13 @@ echo                      to the FlusherNT installation folders.
 echo                  This might take several minutes to complete.
 echo,
 echo.
-dism /Apply-Image /ImageFile:%IMAGESDRIVE%:\sources\install.esd /Index:1 /ApplyDir:G:\
+dism /Apply-Image /ImageFile:%IMAGESDRIVE%:\sources\install.wim /Index:1 /ApplyDir:G:\
 echo,
 goto bcd
 :bcd
 cls
 echo,
-echo  FlusherNT Setup
+echo  LantherNT
 echo =================
 echo,
 echo    Installing the bootloader...
@@ -269,7 +269,7 @@ goto setupdone
 "C:\path_to\nircmd.exe" cdrom open %imagesdrive%
 cls
 echo,
-echo  FlusherNT Setup
+echo  LantherNT
 echo =================
 echo,
 echo    Setup has completed successfully.
