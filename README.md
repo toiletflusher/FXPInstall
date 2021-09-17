@@ -5,3 +5,5 @@ Use a Windows PE image of Windows ADK, download LantherNT.cmd and rename it to s
 You can also use the premade boot.wim files in the releases page (coming soon!).
 # Why?
 Mainly to make a installer that looks like the legacy NT installer, in NT 3.1 - XP.
+# Credits
+Original code and uploading the most recent version at the time of uploading by Windows XP Pro, most modifications made by me.
