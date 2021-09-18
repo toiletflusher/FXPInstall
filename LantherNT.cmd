@@ -252,9 +252,9 @@ echo  LantherNT
 echo ===========
 echo,
 echo                      Please insert the correct disc
-echo                    into your CD Drive and press enter..
-SET /P M=Press ENTER to Proceed
-IF "%M%"=="" GOTO cdcheck
+echo                    into your CD Drive and press any key.
+pause >nul
+goto cdcheck
 :install
 cd X:\
 cls
