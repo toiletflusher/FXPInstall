@@ -243,14 +243,24 @@ IF "%M%"=="2" GOTO continue1
 for %%a in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do @if exist %%a:\sources set IMAGESDRIVE=%%a
 goto cdcheck
 :cdcheck
-:: vol %IMAGESDRIVE%:
-goto install
+vol %IMAGESDRIVE%: | find "LantherNT" > nul
+if %ERRORLEVEL% == 0 goto install
+)
+cls
+echo,
+echo  LantherNT
+echo ===========
+echo,
+echo                      Please insert the correct disc
+echo                    into your CD Drive and press enter..
+SET /P M=Press ENTER to Proceed
+IF "%M%"=="" GOTO cdcheck
 :install
 cd X:\
 cls
 echo,
 echo  LantherNT
-echo =================
+echo ===========
 echo,
 echo                      Please wait while Setup copies files
 echo                      to the LantherNT installation folders.
@@ -264,7 +274,7 @@ goto bcd
 cls
 echo,
 echo  LantherNT
-echo =================
+echo ===========
 echo,
 echo    Installing the bootloader...
 echo,
@@ -275,7 +285,7 @@ goto setupdone
 cls
 echo,
 echo  LantherNT
-echo =================
+echo ===========
 echo,
 echo    Setup has completed successfully.
 echo,
