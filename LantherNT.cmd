@@ -252,7 +252,8 @@ echo  LantherNT
 echo ===========
 echo,
 echo                      Please insert the correct disc
-echo                    into your CD Drive and press any key.
+echo                   into your CD Drive and press any key
+echo                               to continue.
 pause >nul
 goto cdcheck
 :install
