@@ -76,10 +76,11 @@ echo ===========
 echo.
 echo    Would you like to do automatic or manual partitioning?
 echo.
-echo.
 echo       - To do manual partitioning, press M.
 echo.
 echo       - To do automatic partitioning, press A.
+echo.
+echo       - Press C to return to the previous screen.
 echo.
 echo.
 echo.
