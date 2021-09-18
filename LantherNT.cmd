@@ -88,6 +88,7 @@ choice /n /c ma
 SET M=%errorlevel%
 IF "%M%"=="1" GOTO manual
 IF "%M%"=="2" GOTO auto
+IF "%M%"=="3" GOTO mainmenu
 goto continue1w
 :manualw
 cls
