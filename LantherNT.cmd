@@ -39,7 +39,7 @@ echo.
 echo       - To repair a Windows installation using Recovery
 echo         Console, press R.
 echo.
-echo       - To quit setup without installing FlusherNT, press
+echo       - To quit setup without installing Windows, press
 echo         N.
 echo.
 echo.
