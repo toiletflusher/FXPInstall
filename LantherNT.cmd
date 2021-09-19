@@ -244,7 +244,7 @@ for %%a in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do @if exist %%
 goto cdcheck
 :cdcheck
 vol %IMAGESDRIVE%: | find "LantherNT" > nul
-if %ERRORLEVEL% == 0 goto install
+if %ERRORLEVEL% == 0 goto wimoresd
 )
 cls
 echo,
@@ -256,6 +256,26 @@ echo                   into your CD Drive and press any key
 echo                               to continue.
 pause >nul
 goto cdcheck
+:wimoresd
+if exist %IMAGESDRIVE%:\sources\install.wim (
+    set IMAGETYPE=.wim
+) else (
+    goto esd
+)
+:esd
+if exist %IMAGESDRIVE%:\sources\install.esd (
+    set IMAGETYPE=.esd
+) else (
+    cls
+    echo,
+    echo  LantherNT
+    echo ===========
+    echo,
+    echo                      No image file found.
+    echo                 Aborting, press any key to exit.
+    pause >nul
+    exit
+)
 :install
 cd X:\
 cls
@@ -268,7 +288,7 @@ echo                      to the LantherNT installation folders.
 echo                  This might take several minutes to complete.
 echo,
 echo.
-dism /Apply-Image /ImageFile:%IMAGESDRIVE%:\sources\install.wim /Index:1 /ApplyDir:G:\
+dism /Apply-Image /ImageFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE% /Index:1 /ApplyDir:G:\
 echo,
 goto bcd
 :bcd
