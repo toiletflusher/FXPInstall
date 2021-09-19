@@ -258,13 +258,13 @@ pause >nul
 goto cdcheck
 :wimoresd
 if exist %IMAGESDRIVE%:\sources\install.wim (
-    set IMAGETYPE=.wim
+    set IMAGETYPE=.wim && goto install
 ) else (
     goto esd
 )
 :esd
 if exist %IMAGESDRIVE%:\sources\install.esd (
-    set IMAGETYPE=.esd
+    set IMAGETYPE=.esd && goto install
 ) else (
     cls
     echo,
