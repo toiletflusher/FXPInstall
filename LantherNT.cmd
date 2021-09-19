@@ -284,7 +284,7 @@ echo  LantherNT
 echo ===========
 echo,
 echo                      Please wait while Setup copies files
-echo                      to the LantherNT installation folders.
+echo                      to the Windows installation folders.
 echo                  This might take several minutes to complete.
 echo,
 echo.
