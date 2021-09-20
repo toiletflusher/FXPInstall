@@ -60,16 +60,14 @@ echo,
 echo  LantherNT
 echo ===========
 echo,
-echo Credits:
-echo Windows XP Pro: original creator of LantherNT, makes some modifications.
-echo,
-echo Toiletflusher: most of the code done by him.
-echo,
-echo pog5: original erase disk choice manager code
-echo,
-echo,
-echo Github: github.com/WindowsXPPro3/LantherNT
-echo,
+echo     Credits:
+echo       - Windows XP Pro: original creator of LantherNT, makes some modifications.
+echo       - Toiletflusher: most of the code done by him.
+echo       - pog5: original erase disk choice manager code
+echo     Information:
+echo       - Github: github.com/WindowsXPPro3/LantherNT
+echo.
+echo         Press any key to return to main screen.
 echo Press any key to return to main screen.
 pause >nul
 goto mainmenu
