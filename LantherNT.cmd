@@ -66,6 +66,11 @@ echo,
 echo Toiletflusher: most of the code done by him.
 echo,
 echo pog5: original erase disk choice manager code
+echo,
+echo,
+echo Github: github.com/WindowsXPPro3/LantherNT
+echo,
+
 echo Press any key to return to main screen.
 pause >nul
 goto mainmenu
