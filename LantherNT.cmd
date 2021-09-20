@@ -55,7 +55,13 @@ cls
 echo Quitting Setup...
 exit
 :recovery
-start cmd.exe
+echo @echo off >> "X:\recovery.bat"
+echo echo. >> "X:\recovery.bat"
+echo echo  LantherNT >> "X:\recovery.bat"
+echo echo =========== >> "X:\recovery.bat"
+echo echo. >> "X:\recovery.bat"
+echo echo Welcome to Recovery. >> "X:\recovery.bat"
+start cmd.exe /K "X:\recovery.bat"
 goto mainmenu
 :continue1w
 echo.
@@ -182,7 +188,7 @@ echo exit >> X:\diskpart.txt
 goto format2
 :format2
 echo    Formatting the disk...
-diskpart /s "X:\diskpart.txt" >diskpartlog.txt
+diskpart /s "X:\diskpart.txt" > X:\diskpartlog.txt
 goto formatdone
 :format
 echo sel dis %diskn% >> X:\diskpart.txt
