@@ -56,6 +56,7 @@ cls
 echo Quitting Setup...
 exit
 :credits
+cls
 echo,
 echo  LantherNT
 echo ===========
