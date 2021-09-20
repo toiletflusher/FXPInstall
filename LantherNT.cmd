@@ -225,7 +225,7 @@ IF "%M%"=="1" GOTO imagex
 IF "%M%"=="2" GOTO continue1
 goto autow
 :checklogs
-notepad diskpartlog.txt
+notepad X:\diskpartlog.txt
 cls
 echo,
 echo  LantherNT
