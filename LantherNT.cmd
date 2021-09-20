@@ -68,6 +68,7 @@ echo       - pog5: original erase disk choice manager code
 echo     Information:
 echo       - Github: github.com/WindowsXPPro3/LantherNT
 echo       - Website: www.lanthernt.ml
+echo       - LantherNT Version 0.10
 echo.
 echo         Press any key to return to main screen.
 pause >nul
@@ -334,7 +335,7 @@ echo  LantherNT
 echo ===========
 echo,
 echo    Creating log files...
-
+xcopy X:\diskpartlog.txt G:\Windows\Panther\LantherNT.log
 goto setupdone
 :setupdone
 :: "X:\nircmd.exe" cdrom open %imagesdrive%
