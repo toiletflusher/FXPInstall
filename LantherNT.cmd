@@ -44,16 +44,30 @@ echo         N.
 echo.
 echo.
 echo.
-choice /n /c yrn
+choice /n /c yrnc
 SET M=%errorlevel%
 IF "%M%"=="1" GOTO continue1
 IF "%M%"=="2" GOTO recovery
 IF "%M%"=="3" GOTO cancel
+IF "%M%"=="4" GOTO credits
 goto wrongkey
 :cancel
 cls
 echo Quitting Setup...
 exit
+:credits
+echo,
+echo  LantherNT
+echo ===========
+echo,
+echo Credits:
+echo Windows XP Pro: original creator of LantherNT, makes some modifications.
+echo,
+echo Toiletflusher: most of the code done by him.
+echo,
+echo Press any key to return to main screen.
+pause >nul
+goto mainmenu
 :recovery
 echo @echo off >> "X:\recovery.bat"
 echo echo. >> "X:\recovery.bat"
