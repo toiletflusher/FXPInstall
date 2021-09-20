@@ -70,7 +70,6 @@ echo,
 echo,
 echo Github: github.com/WindowsXPPro3/LantherNT
 echo,
-
 echo Press any key to return to main screen.
 pause >nul
 goto mainmenu
