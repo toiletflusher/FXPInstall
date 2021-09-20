@@ -73,6 +73,7 @@ echo         Press any key to return to main screen.
 pause >nul
 goto mainmenu
 :recovery
+cls
 echo @echo off >> "X:\recovery.bat"
 echo echo. >> "X:\recovery.bat"
 echo echo  LantherNT >> "X:\recovery.bat"
@@ -82,6 +83,7 @@ echo echo Welcome to Recovery. >> "X:\recovery.bat"
 start cmd.exe /K "X:\recovery.bat"
 goto mainmenu
 :continue1w
+cls
 echo.
 echo  LantherNT
 echo ===========
@@ -324,9 +326,18 @@ echo,
 echo    Installing the bootloader...
 echo,
 bcdboot G:\Windows
+goto dumplogs
+:dumplogs
+cls
+echo,
+echo  LantherNT
+echo ===========
+echo,
+echo    Creating log files...
+
 goto setupdone
 :setupdone
-:: "C:\path_to\nircmd.exe" cdrom open %imagesdrive%
+:: "X:\nircmd.exe" cdrom open %imagesdrive%
 cls
 echo,
 echo  LantherNT
