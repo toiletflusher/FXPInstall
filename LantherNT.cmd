@@ -65,6 +65,7 @@ echo Windows XP Pro: original creator of LantherNT, makes some modifications.
 echo,
 echo Toiletflusher: most of the code done by him.
 echo,
+echo pog5: original erase disk choice manager code
 echo Press any key to return to main screen.
 pause >nul
 goto mainmenu
