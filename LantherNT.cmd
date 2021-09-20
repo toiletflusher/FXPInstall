@@ -56,24 +56,26 @@ cls
 echo Quitting Setup...
 exit
 :credits
+cls
 echo,
 echo  LantherNT
 echo ===========
 echo,
 echo Credits:
-echo Windows XP Pro: original creator of LantherNT, makes some modifications.
+echo Windows XP Pro: original creator of LantherNT, makes some modifications, adds lots of features.
 echo,
 echo Toiletflusher: most of the code done by him.
 echo,
-echo pog5: original erase disk choice manager code
+echo pog5: original erase disk choice manager code.
 echo,
 echo,
-echo Github: github.com/WindowsXPPro3/LantherNT
+echo Github: github.com/WindowsXPPro3/LantherNT     Website: www.lanthernt.ml
 echo,
 echo Press any key to return to main screen.
 pause >nul
 goto mainmenu
 :recovery
+cls
 echo @echo off >> "X:\recovery.bat"
 echo echo. >> "X:\recovery.bat"
 echo echo  LantherNT >> "X:\recovery.bat"
@@ -83,6 +85,7 @@ echo echo Welcome to Recovery. >> "X:\recovery.bat"
 start cmd.exe /K "X:\recovery.bat"
 goto mainmenu
 :continue1w
+cls
 echo.
 echo  LantherNT
 echo ===========
@@ -325,9 +328,18 @@ echo,
 echo    Installing the bootloader...
 echo,
 bcdboot G:\Windows
+goto dumplogs
+:dumplogs
+cls
+echo,
+echo  LantherNT
+echo ===========
+echo,
+echo    Creating log files...
+
 goto setupdone
 :setupdone
-:: "C:\path_to\nircmd.exe" cdrom open %imagesdrive%
+:: "X:\nircmd.exe" cdrom open %imagesdrive%
 cls
 echo,
 echo  LantherNT
