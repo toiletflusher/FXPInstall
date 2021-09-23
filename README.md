@@ -5,6 +5,7 @@ Use a Windows PE image of Windows ADK, download LantherNT.cmd and rename it to s
 You can also use the premade boot.wim files in the releases page.
 # Notes
 LantherNT doesn't support multiple Windows versions in a single WIM file, so make sure to remove all versions from install.wim EXCEPT the only one you need.
+Multiple Windows versions in a single WIM file will be supported in 0.11.
 # Why?
 Mainly to make a installer that looks like the legacy NT installer, in NT 3.1 - XP.
 # Credits
