@@ -8,4 +8,6 @@ LantherNT doesn't support multiple Windows versions in a single WIM file, so mak
 # Why?
 Mainly to make a installer that looks like the legacy NT installer, in NT 3.1 - XP.
 # Credits
-Original code and uploading the most recent version at the time of uploading by Windows XP Pro, most modifications made by Toiletflusher.
+Original code and uploading the most recent version at the time of uploading by Windows XP Pro.
+Most modifications made by Toiletflusher.
+Disk manager by pog5.
