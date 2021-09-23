@@ -317,7 +317,33 @@ echo,
 echo.
 dism /Apply-Image /ImageFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE% /Index:1 /ApplyDir:G:\
 echo,
+goto productkey
+:productkey
+cls
+echo.
+echo  LantherNT
+echo ===========
+echo,
+echo     Please enter your product key for your version of Windows.
+echo                         Type "none" to skip.
+echo,
+set /P productkey="     Product Key: "
+if "%productkey%"=="none" goto bcd
+dism /image:G:\ /Set-ProductKey:%productkey%> X:\productkey.log
+type X:\productkey.log | find "The specified product key could not be validated." > nul
+if %ERRORLEVEL == 0 goto invalidkey
+)
 goto bcd
+:invalidkey
+cls
+echo.
+echo  LantherNT
+echo ===========
+echo,
+echo     The specified product key could not be validated.
+echo               Press any key to go back...
+pause >nul
+goto productkey
 :bcd
 cls
 echo,
