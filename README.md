@@ -1,8 +1,8 @@
 # LantherNT
 LantherNT, an installer for windows written in batch!
 # Features
-Product key prompt
-WIM and ESD support
+Product key prompt.
+WIM and ESD support.
 
 # How to install?
 Use a Windows PE image of Windows ADK, download LantherNT.cmd and rename it to startnet.cmd.
