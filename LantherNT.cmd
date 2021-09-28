@@ -309,6 +309,7 @@ echo  LantherNT
 echo ===========
 echo,
 echo
+dism /Get-WimInfo /WimFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE%
 :install
 cd X:\
 cls
@@ -321,7 +322,7 @@ echo                      to the Windows installation folders.
 echo                  This might take several minutes to complete.
 echo,
 echo.
-dism /Apply-Image /ImageFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE% /Index:%indexselect% /ApplyDir:G:\
+dism /Apply-Image /ImageFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE% /Index:%index% /ApplyDir:G:\
 echo,
 goto productkey
 :productkey
