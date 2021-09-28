@@ -68,7 +68,7 @@ echo       - pog5: original erase disk choice manager code
 echo     Information:
 echo       - Github: github.com/WindowsXPPro3/LantherNT
 echo       - Website: www.lanthernt.ml
-echo       - LantherNT Version 0.10
+echo       - LantherNT Version 0.11
 echo.
 echo         Press any key to return to main screen.
 pause >nul
@@ -114,7 +114,7 @@ echo.
 choice /n /c ma
 SET M=%errorlevel%
 IF "%M%"=="1" GOTO manual
-IF "%M%"=="2" GOTO auto
+IF "%M%"=="2" GOTO autopart
 IF "%M%"=="3" GOTO mainmenu
 goto continue1w
 :manualw
@@ -150,7 +150,6 @@ goto manualw
 echo echo this setup answer does not exist.
 echo,
 goto continue1
-:auto
 :autopart
 echo lis dis > disktmp.txt
 cls
@@ -285,13 +284,13 @@ pause >nul
 goto cdcheck
 :wimoresd
 if exist %IMAGESDRIVE%:\sources\install.wim (
-    set IMAGETYPE=.wim && goto install
+    set IMAGETYPE=.wim && goto indexselect
 ) else (
     goto esd
 )
 :esd
 if exist %IMAGESDRIVE%:\sources\install.esd (
-    set IMAGETYPE=.esd && goto install
+    set IMAGETYPE=.esd && goto indexselect
 ) else (
     cls
     echo,
@@ -303,6 +302,13 @@ if exist %IMAGESDRIVE%:\sources\install.esd (
     pause >nul
     exit
 )
+:indexselect
+cls
+echo,
+echo  LantherNT
+echo ===========
+echo,
+echo
 :install
 cd X:\
 cls
@@ -315,7 +321,7 @@ echo                      to the Windows installation folders.
 echo                  This might take several minutes to complete.
 echo,
 echo.
-dism /Apply-Image /ImageFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE% /Index:1 /ApplyDir:G:\
+dism /Apply-Image /ImageFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE% /Index:%indexselect% /ApplyDir:G:\
 echo,
 goto productkey
 :productkey
