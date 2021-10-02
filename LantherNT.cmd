@@ -371,7 +371,7 @@ echo    Creating log files...
 xcopy X:\diskpartlog.txt G:\Windows\Panther\LantherNT.log
 goto setupdone
 :setupdone
-:: "X:\nircmd.exe" cdrom open %imagesdrive%
+X:\cdcontroller.exe /o %imagesdrive%
 cls
 echo,
 echo  LantherNT
