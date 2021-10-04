@@ -1,5 +1,10 @@
 @echo off
 color 18
+:: uncomment below to skip install, recovery, exit
+::set nomain=1
+:: uncomment options below to choose to automatically choose to partiton automatically or manually
+::set partauto=1
+::set partman=1
 cls
 title LantherNT
 echo.
@@ -23,6 +28,7 @@ echo    Press any key to return to Setup.
 pause >nul
 goto mainmenu
 :mainmenu
+if "%nomain%"=="1" GOTO continue1
 cls
 echo.
 echo  LantherNT
@@ -96,6 +102,8 @@ echo.
 pause >nul
 goto continue1
 :continue1
+if "%partauto%"=="1" GOTO autopart
+if "%partman%"=="1" GOTO manual
 cls
 echo.
 echo  LantherNT
