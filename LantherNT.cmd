@@ -1,4 +1,5 @@
 @echo off
+config.bat
 color 18
 cls
 title LantherNT
