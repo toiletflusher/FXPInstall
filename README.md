@@ -7,8 +7,8 @@ WIM and ESD support.
 # How to install?
 Use a Windows PE image of Windows ADK, download LantherNT.cmd and rename it to startnet.cmd.
 You can also use the premade WIM files in the releases page.
-To install the WIM from the releases page:/n
-Download the WIM and rename it to boot.wim, and replace the boot.wim inside your ISO with the installer one./n
+To install the WIM from the releases page: <br />
+Download the WIM and rename it to boot.wim, and replace the boot.wim inside your ISO with the installer one. <br />
 # Notes
 LantherNT doesn't support multiple Windows versions in a single WIM file, so make sure to remove all versions from install.wim EXCEPT the only one you need.
 Multiple Windows versions in a single WIM file will be supported in 0.11.
