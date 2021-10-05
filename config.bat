@@ -4,3 +4,5 @@
 :: uncomment options below to choose to automatically choose to partiton automatically or manually
 ::set partauto=1
 ::set partman=1
+:: below is the cd name, change it to the iso OR cd name the cd/iso has
+set cdname=LantherNT
