@@ -1,5 +1,5 @@
 @echo off
-config.bat
+call config.bat
 color 18
 cls
 title LantherNT
@@ -273,7 +273,7 @@ IF "%M%"=="2" GOTO continue1
 for %%a in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do @if exist %%a:\sources set IMAGESDRIVE=%%a
 goto cdcheck
 :cdcheck
-vol %IMAGESDRIVE%: | find "LantherNT" > nul
+vol %IMAGESDRIVE%: | find "%cdname%" > nul
 if %ERRORLEVEL% == 0 goto wimoresd
 )
 cls
