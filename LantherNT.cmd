@@ -155,6 +155,8 @@ echo echo this setup answer does not exist.
 echo,
 goto continue1
 :autopart
+if defined diskn (set diskne=1) else (set diskne=0)
+if "%diskne%"=="0" goto format3
 echo lis dis > disktmp.txt
 cls
 echo.
@@ -184,6 +186,7 @@ echo         formatting your disk, press N.
 choice /n
 SET M=%errorlevel%
 IF "%M%"=="2" GOTO autopart
+:format3
 cls
 echo.
 echo  LantherNT
