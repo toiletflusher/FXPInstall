@@ -6,4 +6,5 @@
 ::set partman=1
 ::set diskn=0
 :: below is the cd name, change it to the iso OR cd name the cd/iso has
+:: set cdname to Volume to make it accept any cd
 set cdname=LantherNT
