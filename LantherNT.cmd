@@ -329,7 +329,7 @@ echo                      to the Windows installation folders.
 echo                  This might take several minutes to complete.
 echo,
 echo.
-dism /Apply-Image /ImageFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE% /Index:%index% /ApplyDir:G:\
+dism /LogPath:X:\dism.log /Apply-Image /ImageFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE% /Index:%index% /ApplyDir:G:\
 echo,
 goto productkey
 :productkey
@@ -375,7 +375,8 @@ echo  LantherNT
 echo ===========
 echo,
 echo    Creating log files...
-xcopy X:\diskpartlog.txt G:\Windows\Panther\LantherNT.log
+xcopy X:\diskpartlog.txt G:\Windows\Panther\LantherNT\diskpart.log
+xcopy X:\dism.log G:\Windows\Panther\LantherNT\dism.log
 goto setupdone
 :setupdone
 X:\cdcontroller.exe /o %imagesdrive%
