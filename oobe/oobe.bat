@@ -1,4 +1,5 @@
 @echo off
+::This is not done yet, and LantherNT won't copy the oobe file and set it up yet. 
 "C:\Windows\System32\SystemPropertiesComputerName.exe"
 "C:\Windows\System32\netplwiz.exe"
 "C:\Windows\System32\OptionalFeatures.exe"
