@@ -10,6 +10,7 @@ echo.
 echo    Setup is starting Windows
 wpeinit
 color 18
+mkdir X:\Logs
 cls
 goto mainmenu
 :wrongkey
@@ -215,7 +216,7 @@ echo exit >> X:\diskpart.txt
 goto format2
 :format2
 echo    Formatting the disk...
-diskpart /s "X:\diskpart.txt" > X:\diskpartlog.txt
+diskpart /s "X:\diskpart.txt" > X:\Logs\diskpartlog.txt
 goto formatdone
 :format
 echo sel dis %diskn% >> X:\diskpart.txt
@@ -252,7 +253,7 @@ IF "%M%"=="1" GOTO imagex
 IF "%M%"=="2" GOTO continue1
 goto autow
 :checklogs
-notepad X:\diskpartlog.txt
+notepad X:\Logs\diskpartlog.txt
 cls
 echo,
 echo  LantherNT
@@ -274,7 +275,6 @@ IF "%M%"=="1" GOTO imagex
 IF "%M%"=="2" GOTO continue1
 :imagex
 for %%a in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do @if exist %%a:\sources set IMAGESDRIVE=%%a
-goto cdcheck
 :cdcheck
 vol %IMAGESDRIVE%: | find "%cdname%" > nul
 if %ERRORLEVEL% == 0 goto wimoresd
@@ -315,8 +315,10 @@ echo,
 echo  LantherNT
 echo ===========
 echo,
-echo
-dism /Get-WimInfo /WimFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE%
+echo                      Please wait while Setup checks the
+echo                     number of indexes inside your image.
+dism /LogPath:X:\Logs\WimInfo.log /Get-WimInfo /WimFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE%
+
 :install
 cd X:\
 cls
@@ -329,7 +331,7 @@ echo                      to the Windows installation folders.
 echo                  This might take several minutes to complete.
 echo,
 echo.
-dism /LogPath:X:\dism.log /Apply-Image /ImageFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE% /Index:%index% /ApplyDir:G:\
+dism /LogPath:X:\Logs\dism.log /Apply-Image /ImageFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE% /Index:%index% /ApplyDir:G:\
 echo,
 goto productkey
 :productkey
@@ -343,8 +345,8 @@ echo                         Type "none" to skip.
 echo,
 set /P productkey="     Product Key: "
 if "%productkey%"=="none" goto bcd
-dism /image:G:\ /Set-ProductKey:%productkey%> X:\productkey.log
-type X:\productkey.log | find "The specified product key could not be validated." > nul
+dism /image:G:\ /Set-ProductKey:%productkey%> X:\Logs\productkey.log
+type X:\Logs\productkey.log | find "The specified product key could not be validated." > nul
 if %ERRORLEVEL == 0 goto invalidkey
 )
 goto bcd
@@ -375,8 +377,8 @@ echo  LantherNT
 echo ===========
 echo,
 echo    Creating log files...
-xcopy X:\diskpartlog.txt G:\Windows\Panther\LantherNT\diskpart.log
-xcopy X:\dism.log G:\Windows\Panther\LantherNT\dism.log
+mkdir G:\Windows\Panther\LantherNT
+xcopy X:\Logs\*.* G:\Windows\Panther\LantherNT\
 goto setupdone
 :setupdone
 X:\cdcontroller.exe /o %imagesdrive%
