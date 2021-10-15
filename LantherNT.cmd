@@ -143,7 +143,7 @@ echo    MAKE SURE TO MAKE THE DRIVE G:\
 echo,
 diskpart
 echo.
-echo    Have you done your partitioning?
+echo    Is partitioning complete?
 echo.
 echo    y or n?
 choice /n
@@ -291,13 +291,13 @@ pause >nul
 goto cdcheck
 :wimoresd
 if exist %IMAGESDRIVE%:\sources\install.wim (
-    set IMAGETYPE=.wim && goto indexselect
+    set IMAGETYPE=.wim && goto indexcheck
 ) else (
     goto esd
 )
 :esd
 if exist %IMAGESDRIVE%:\sources\install.esd (
-    set IMAGETYPE=.esd && goto indexselect
+    set IMAGETYPE=.esd && goto indexcheck
 ) else (
     cls
     echo,
@@ -309,7 +309,7 @@ if exist %IMAGESDRIVE%:\sources\install.esd (
     pause >nul
     exit
 )
-:indexselect
+:indexcheck
 cls
 echo,
 echo  LantherNT
@@ -317,7 +317,7 @@ echo ===========
 echo,
 echo                      Please wait while Setup checks the
 echo                     number of indexes inside your image.
-dism /LogPath:X:\Logs\WimInfo.log /Get-WimInfo /WimFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE%
+dism /Get-WimInfo /WimFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE% > X:\Logs\indexcheck.log
 
 :install
 cd X:\
@@ -347,7 +347,7 @@ set /P productkey="     Product Key: "
 if "%productkey%"=="none" goto bcd
 dism /image:G:\ /Set-ProductKey:%productkey%> X:\Logs\productkey.log
 type X:\Logs\productkey.log | find "The specified product key could not be validated." > nul
-if %ERRORLEVEL == 0 goto invalidkey
+if %ERRORLEVEL% == 0 goto invalidkey
 )
 goto bcd
 :invalidkey
