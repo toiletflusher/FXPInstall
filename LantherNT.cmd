@@ -318,7 +318,34 @@ echo,
 echo                      Please wait while Setup checks the
 echo                     number of indexes inside your image.
 dism /Get-WimInfo /WimFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE% > X:\Logs\indexcheck.log
-
+type X:\Logs\indexcheck.log | find "Index : 2" > nul
+if %ERRORLEVEL% == 0 goto indexselect
+)
+set index=1
+goto install
+:indexselect
+cls
+echo,
+echo  LantherNT
+echo ===========
+echo,
+echo                      Please select your index number.
+set /P index="     Index: "
+dism /Get-WimInfo /WimFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE% /index:%index% > X:\Logs\indexexist.log
+type X:\Logs\indexexist.log | find "Error: 87" > nul
+if %ERRORLEVEL% == 0 goto indexnotexist
+)
+goto install
+:indexnotexist
+cls
+echo,
+echo  LantherNT
+echo ===========
+echo,
+echo                      Index does not exist, please press enter and
+echo                             re-enter your index number.
+pause >nul
+goto indexselect
 :install
 cd X:\
 cls
