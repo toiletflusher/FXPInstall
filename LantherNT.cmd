@@ -396,8 +396,19 @@ cls
 echo,
 echo  LantherNT
 echo ===========
-echo,
-echo press B for bios, press U for uefi, press A for support for both firmware types
+echo.
+echo    Please select boot options.
+echo.
+echo.
+echo       - To install BIOS only support, press B.
+echo.
+echo       - To install UEFI only support, press U.
+echo.
+echo       - To install support for both UEFI, BIOS
+echo         press A
+echo.
+echo.
+echo.
 choice /n /c bua
 set M=%ERRORLEVEL%
 if "%M%"=="1" set firmwaretype=BIOS
