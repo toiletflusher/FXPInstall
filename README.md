@@ -7,6 +7,8 @@ Configuration file. <br />
 Logging support. <br />
 Index selection. <br />
 Custom OOBE. <br />
+System Reserved support. <br />
+Firmware selection. <br />
 # How to install?
 Use a Windows PE image of Windows ADK, download LantherNT.cmd, cdcontroller.exe (needed for LantherNT to properly eject CDs) and rename it to startnet.cmd.
 You can also use the premade WIM files in the releases page. <br />
