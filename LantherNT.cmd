@@ -207,8 +207,12 @@ IF "%M%"=="2" GOTO format
 :quick
 echo sel dis %diskn% >> X:\diskpart.txt
 echo clean >> X:\diskpart.txt
+echo create partition primary size=100 >> X:\diskpart.txt
 echo create partition primary >> X:\diskpart.txt
 echo sel part 1 >> X:\diskpart.txt
+echo format fs=ntfs quick >> X:\diskpart.txt
+echo assign letter=h >> X:\diskpart.txt
+echo sel part 2 >> X:\diskpart.txt
 echo format fs=ntfs quick >> X:\diskpart.txt
 echo assign letter=g >> X:\diskpart.txt
 echo active >> X:\diskpart.txt
@@ -376,7 +380,7 @@ dism /image:G:\ /Set-ProductKey:%productkey%> X:\Logs\productkey.log
 type X:\Logs\productkey.log | find "The specified product key could not be validated." > nul
 if %ERRORLEVEL% == 0 goto invalidkey
 )
-goto bcd
+goto bcdoptions
 :invalidkey
 cls
 echo.
@@ -387,6 +391,19 @@ echo     The specified product key could not be validated.
 echo               Press any key to go back...
 pause >nul
 goto productkey
+:bcdoptions
+cls
+echo,
+echo  LantherNT
+echo ===========
+echo,
+echo press B for bios, press U for uefi, press A for support for both firmware types
+choice /n /c bua
+set M=%ERRORLEVEL%
+if "%M%"=="1" set firmwaretype=BIOS
+if "%M%"=="2" set firmwaretype=UEFI
+if "%M%"=="3" set firmwaretype=ALL
+goto bcd
 :bcd
 cls
 echo,
@@ -395,7 +412,7 @@ echo ===========
 echo,
 echo    Installing the bootloader...
 echo,
-bcdboot G:\Windows
+bcdboot G:\Windows /f %firmwaretype% /addlast
 goto dumplogs
 :dumplogs
 cls
