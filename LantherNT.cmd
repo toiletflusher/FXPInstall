@@ -407,8 +407,6 @@ echo.
 echo       - To install support for both UEFI, BIOS
 echo         press A
 echo.
-echo.
-echo.
 choice /n /c bua
 set M=%ERRORLEVEL%
 if "%M%"=="1" set firmwaretype=BIOS
@@ -444,7 +442,7 @@ echo ===========
 echo,
 echo    Setup has completed successfully.
 echo,
-echo    If there are any removable drives, remove them.
+echo    If the CD hasnt been ejected, please eject it now.
 echo.
 echo    To restart your computer, press R.
 echo    When your computer restarts, Windows will start up.
