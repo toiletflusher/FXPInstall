@@ -375,12 +375,12 @@ echo     Please enter your product key for your version of Windows.
 echo                         Type "none" to skip.
 echo,
 set /P productkey="     Product Key: "
-if "%productkey%"=="none" goto bcd
+if "%productkey%"=="none" goto checkboot
 dism /image:G:\ /Set-ProductKey:%productkey%> X:\Logs\productkey.log
 type X:\Logs\productkey.log | find "The specified product key could not be validated." > nul
 if %ERRORLEVEL% == 0 goto invalidkey
 )
-goto bcdoptions
+goto checkboot
 :invalidkey
 cls
 echo.
@@ -391,6 +391,24 @@ echo     The specified product key could not be validated.
 echo               Press any key to go back...
 pause >nul
 goto productkey
+:checkboot
+cls
+echo,
+echo LantherNT
+echo ===========
+echo.
+echo                      Please wait while
+echo             Setup checks available boot options...
+if exist G:\Windows\Boot\EFI (
+    set uefisupportimg=yes
+) else (
+    set uefisupportimg=no
+)
+if exist G:\Windows\Boot\PCAT (
+    set biossupportimg=yes
+) else (
+    set biossupportimg=no
+)
 :bcdoptions
 cls
 echo,
