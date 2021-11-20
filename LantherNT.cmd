@@ -10,6 +10,7 @@ echo.
 echo    Setup is starting Windows
 wpeinit
 color 18
+mkdir X:\Logs
 cls
 goto mainmenu
 :wrongkey
@@ -142,7 +143,7 @@ echo    MAKE SURE TO MAKE THE DRIVE G:\
 echo,
 diskpart
 echo.
-echo    Have you done your partitioning?
+echo    Is partitioning complete?
 echo.
 echo    y or n?
 choice /n
@@ -206,8 +207,12 @@ IF "%M%"=="2" GOTO format
 :quick
 echo sel dis %diskn% >> X:\diskpart.txt
 echo clean >> X:\diskpart.txt
+echo create partition primary size=100 >> X:\diskpart.txt
 echo create partition primary >> X:\diskpart.txt
 echo sel part 1 >> X:\diskpart.txt
+echo format fs=ntfs quick >> X:\diskpart.txt
+echo assign letter=h >> X:\diskpart.txt
+echo sel part 2 >> X:\diskpart.txt
 echo format fs=ntfs quick >> X:\diskpart.txt
 echo assign letter=g >> X:\diskpart.txt
 echo active >> X:\diskpart.txt
@@ -215,7 +220,7 @@ echo exit >> X:\diskpart.txt
 goto format2
 :format2
 echo    Formatting the disk...
-diskpart /s "X:\diskpart.txt" > X:\diskpartlog.txt
+diskpart /s "X:\diskpart.txt" > X:\Logs\diskpartlog.txt
 goto formatdone
 :format
 echo sel dis %diskn% >> X:\diskpart.txt
@@ -252,7 +257,7 @@ IF "%M%"=="1" GOTO imagex
 IF "%M%"=="2" GOTO continue1
 goto autow
 :checklogs
-notepad X:\diskpartlog.txt
+notepad X:\Logs\diskpartlog.txt
 cls
 echo,
 echo  LantherNT
@@ -273,8 +278,7 @@ SET M=%errorlevel%
 IF "%M%"=="1" GOTO imagex
 IF "%M%"=="2" GOTO continue1
 :imagex
-for %%a in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do @if exist %%a:\sources set IMAGESDRIVE=%%a
-goto cdcheck
+for %%a in (A B C D E F G H I J K L M N O P Q R S T U V W Y Z) do @if exist %%a:\sources set IMAGESDRIVE=%%a
 :cdcheck
 vol %IMAGESDRIVE%: | find "%cdname%" > nul
 if %ERRORLEVEL% == 0 goto wimoresd
@@ -291,13 +295,13 @@ pause >nul
 goto cdcheck
 :wimoresd
 if exist %IMAGESDRIVE%:\sources\install.wim (
-    set IMAGETYPE=.wim && goto indexselect
+    set IMAGETYPE=.wim && goto indexcheck
 ) else (
     goto esd
 )
 :esd
 if exist %IMAGESDRIVE%:\sources\install.esd (
-    set IMAGETYPE=.esd && goto indexselect
+    set IMAGETYPE=.esd && goto indexcheck
 ) else (
     cls
     echo,
@@ -309,14 +313,43 @@ if exist %IMAGESDRIVE%:\sources\install.esd (
     pause >nul
     exit
 )
+:indexcheck
+cls
+echo,
+echo  LantherNT
+echo ===========
+echo,
+echo                      Please wait while Setup checks the
+echo                     number of indexes inside your image.
+dism /Get-WimInfo /WimFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE% > X:\Logs\indexcheck.log
+type X:\Logs\indexcheck.log | find "Index : 2" > nul
+if %ERRORLEVEL% == 0 goto indexselect
+)
+set index=1
+goto install
 :indexselect
 cls
 echo,
 echo  LantherNT
 echo ===========
 echo,
-echo
-dism /Get-WimInfo /WimFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE%
+echo                      Please select your index number.
+set /P index="     Index: "
+dism /Get-WimInfo /WimFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE% /index:%index% > X:\Logs\indexexist.log
+type X:\Logs\indexexist.log | find "Error: 87" > nul
+if %ERRORLEVEL% == 0 goto indexnotexist
+)
+goto install
+:indexnotexist
+cls
+echo,
+echo  LantherNT
+echo ===========
+echo,
+echo                      Index does not exist, please press enter and
+echo                             re-enter your index number.
+pause >nul
+goto indexselect
 :install
 cd X:\
 cls
@@ -329,7 +362,7 @@ echo                      to the Windows installation folders.
 echo                  This might take several minutes to complete.
 echo,
 echo.
-dism /LogPath:X:\dism.log /Apply-Image /ImageFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE% /Index:%index% /ApplyDir:G:\
+dism /LogPath:X:\Logs\dism.log /Apply-Image /ImageFile:%IMAGESDRIVE%:\sources\install%IMAGETYPE% /Index:%index% /ApplyDir:G:\
 echo,
 goto productkey
 :productkey
@@ -343,11 +376,11 @@ echo                         Type "none" to skip.
 echo,
 set /P productkey="     Product Key: "
 if "%productkey%"=="none" goto bcd
-dism /image:G:\ /Set-ProductKey:%productkey%> X:\productkey.log
-type X:\productkey.log | find "The specified product key could not be validated." > nul
-if %ERRORLEVEL == 0 goto invalidkey
+dism /image:G:\ /Set-ProductKey:%productkey%> X:\Logs\productkey.log
+type X:\Logs\productkey.log | find "The specified product key could not be validated." > nul
+if %ERRORLEVEL% == 0 goto invalidkey
 )
-goto bcd
+goto bcdoptions
 :invalidkey
 cls
 echo.
@@ -358,6 +391,30 @@ echo     The specified product key could not be validated.
 echo               Press any key to go back...
 pause >nul
 goto productkey
+:bcdoptions
+cls
+echo,
+echo  LantherNT
+echo ===========
+echo.
+echo    Please select boot options.
+echo.
+echo.
+echo       - To install BIOS only support, press B.
+echo.
+echo       - To install UEFI only support, press U.
+echo.
+echo       - To install support for both UEFI, BIOS
+echo         press A
+echo.
+echo.
+echo.
+choice /n /c bua
+set M=%ERRORLEVEL%
+if "%M%"=="1" set firmwaretype=BIOS
+if "%M%"=="2" set firmwaretype=UEFI
+if "%M%"=="3" set firmwaretype=ALL
+goto bcd
 :bcd
 cls
 echo,
@@ -366,7 +423,7 @@ echo ===========
 echo,
 echo    Installing the bootloader...
 echo,
-bcdboot G:\Windows
+bcdboot G:\Windows /f %firmwaretype% /addlast
 goto dumplogs
 :dumplogs
 cls
@@ -375,8 +432,8 @@ echo  LantherNT
 echo ===========
 echo,
 echo    Creating log files...
-xcopy X:\diskpartlog.txt G:\Windows\Panther\LantherNT\diskpart.log
-xcopy X:\dism.log G:\Windows\Panther\LantherNT\dism.log
+mkdir G:\Windows\Panther\LantherNT
+xcopy X:\Logs\*.* G:\Windows\Panther\LantherNT\
 goto setupdone
 :setupdone
 X:\cdcontroller.exe /o %imagesdrive%
