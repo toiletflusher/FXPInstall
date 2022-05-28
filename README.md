@@ -15,7 +15,7 @@ You can also use the premade WIM files in the releases page. <br />
 To install the WIM from the releases page: <br />
 Download the WIM and rename it to boot.wim, and replace the boot.wim inside your ISO with the installer one. <br />
 # Why?
-Mainly to make a installer that looks like the legacy NT installer, in NT 3.1 - XP. and support WIM and written in batch.
+Mainly to make a installer that looks like the legacy NT installer, in NT 3.1 - XP, supports WIM/ESD and written in batch.
 # Credits
 Original code and uploading the most recent version at the time of uploading by Windows XP Pro.
 Most modifications made by Toiletflusher.
