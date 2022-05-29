@@ -1,5 +1,4 @@
 @echo off
-set answernoexist=mainmenu
 call config.bat
 color 18
 cls
@@ -13,7 +12,7 @@ wpeinit
 color 18
 mkdir X:\Logs
 cls
-goto %answernoexist%
+goto mainmenu
 :wrongkey
 cls
 echo.
@@ -24,8 +23,9 @@ echo    Sorry, this setup answer does not exist.
 echo. 
 echo    Press any key to return to Setup.
 pause >nul
-goto mainmenu
+goto %answernoexist%
 :mainmenu
+set answernoexist=mainmenu
 if "%nomain%"=="1" GOTO continue1
 cls
 echo.
@@ -87,19 +87,7 @@ echo echo. >> "X:\recovery.bat"
 echo echo Welcome to Recovery. >> "X:\recovery.bat"
 start cmd.exe /K "X:\recovery.bat"
 goto mainmenu
-:continue1w
-cls
-echo.
-echo  LantherNT
-echo ===========
-echo.
-echo    Sorry, this setup answer does not exist.
-echo.
-echo    Press any key to return to Setup.
-echo. 
-pause >nul
-goto continue1
-:continue1
+set answernoexist=continue1
 if "%partauto%"=="1" GOTO autopart
 if "%partman%"=="1" GOTO manual
 cls
@@ -122,20 +110,9 @@ SET M=%errorlevel%
 IF "%M%"=="1" GOTO manual
 IF "%M%"=="2" GOTO autopart
 IF "%M%"=="3" GOTO mainmenu
-goto continue1w
-:manualw
-cls
-echo.
-echo  LantherNT
-echo ===========
-echo.
-echo    Sorry, this setup answer does not exist.
-echo.
-echo    Press any key to return to Setup.
-echo. 
-pause >nul
-goto continue1
+goto wrongkey
 :manual
+set answernoexist=manual
 echo.
 echo  LantherNT
 echo ===========
@@ -151,7 +128,7 @@ choice /n
 SET M=%errorlevel%
 IF "%M%"=="1" GOTO imagex
 IF "%M%"=="2" GOTO continue1
-goto manualw
+goto wrongkey
 :autow
 echo echo this setup answer does not exist.
 echo,
