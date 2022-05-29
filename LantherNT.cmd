@@ -1,4 +1,5 @@
 @echo off
+set answernoexist=mainmenu
 call config.bat
 color 18
 cls
@@ -12,7 +13,7 @@ wpeinit
 color 18
 mkdir X:\Logs
 cls
-goto mainmenu
+goto %answernoexist%
 :wrongkey
 cls
 echo.
